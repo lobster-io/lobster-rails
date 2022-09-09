@@ -29,7 +29,7 @@ module Lobster
           data[:'lob-mangle'] ||= "#{scope_for_mangle}[$name]"
           if model
             data[:'lob-values'] ||= model.as_json
-            data[:'lob-errors'] = model.errors.map { { name: _1.attribute, message: _1.full_message } }
+            data[:'lob-errors'] = model.errors.map { [ _1.attribute, _1.full_message ] }.to_h
           end
         end
 

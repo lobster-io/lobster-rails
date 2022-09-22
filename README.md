@@ -16,6 +16,9 @@ $ gem install lobster-rails
 gem 'lobster-rails'
 ```
 
+## Lobster Rails 0.1.1 (September 2022)
+Update errors format
+
 ## Lobster Rails 0.1.0 (August 2022)
 
 ## Quick Example

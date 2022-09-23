@@ -16,6 +16,9 @@ $ gem install lobster-rails
 gem 'lobster-rails'
 ```
 
+## Lobster Rails 0.1.2 (September 2022)
+Add helper for lob-tuples, and a lob_tuples_from_collection function for translating collections
+
 ## Lobster Rails 0.1.1 (September 2022)
 Update errors format
 

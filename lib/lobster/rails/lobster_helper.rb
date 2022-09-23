@@ -31,9 +31,25 @@ module Lobster
             data[:'lob-values'] ||= model.as_json
             data[:'lob-errors'] = model.errors.map { [ _1.attribute, _1.full_message ] }.to_h
           end
+
+          if data['lob-tuples']
+            data[:'lob-tuples'] = data['lob-tuples'].map do |key, value|
+              if value.class.is_a?(Array)
+                # ["red", "blue"] or [{value: "red", text: "Red"}]
+                [key, value]
+              elsif value.is_a?(Hash)
+                # { red: "Red" }
+                [key, value.map { {value: _1, text: _2 } }]
+              end
+            end.to_h
+          end
         end
 
         form_with(model: model, scope: scope, url: url, format: format, **options, &block)
+      end
+
+      def lob_tuples_from_collection(collection, value_method, text_method)
+        collection.map { |record| { value: record.send(value_method), text: record.send(text_method) } }
       end
     end
   end

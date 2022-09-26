@@ -34,12 +34,11 @@ module Lobster
 
           if data['lob-tuples']
             data[:'lob-tuples'] = data['lob-tuples'].map do |key, value|
-              if value.class.is_a?(Array)
-                # ["red", "blue"] or [{value: "red", text: "Red"}]
-                [key, value]
-              elsif value.is_a?(Hash)
-                # { red: "Red" }
+              if value.is_a?(Hash)
+                # translate { red: "Red" } to lobster preferred format
                 [key, value.map { {value: _1, text: _2 } }]
+              else
+                [key, value]
               end
             end.to_h
           end
